@@ -11,7 +11,7 @@ static void get_int(char *p, va_list *ap) {
 	int len = 0;
 	if (d == 0) {
 		*p++ = '0';
-		return p;
+		//return p;
 	}
 	if (d < 0) {
 		*p++ = '-';

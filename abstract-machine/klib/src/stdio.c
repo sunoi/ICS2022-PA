@@ -5,13 +5,13 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-static void get_int(char *p, va_list *ap) {
+static char* get_int(char *p, va_list *ap) {
 	int d = va_arg(*ap, int);
 	char str[32];
 	int len = 0;
 	if (d == 0) {
 		*p++ = '0';
-		//return p;
+		return p;
 	}
 	if (d < 0) {
 		*p++ = '-';
@@ -24,21 +24,21 @@ static void get_int(char *p, va_list *ap) {
 	for (int i = len-1; i >= 0; i--) {
 		*p++ = str[i];
 	}
-	//return p;
+	return p;
 }
 
-static void get_string(char* p, va_list *ap) {
+static char* get_string(char* p, va_list *ap) {
 	char *str = va_arg(*ap, char*);
 	while(*str) {
 		*p++ = *str++;
 	}
-	//return p;
+	return p;
 }
 
-static void get_char(char* p, va_list *ap) {
+static char* get_char(char* p, va_list *ap) {
 	char ch = (char)va_arg(*ap, int);
 	*p++ = ch;
-	//return p;
+	return p;
 }
 
 static int make_out(char *out, const char *fmt, va_list ap) {
@@ -47,9 +47,9 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 		if (*fmt == '%') {
 			fmt++;
 			switch (*fmt) {
-				case 'd': get_int(p, &ap);break;
-				case 's': get_string(p, &ap);break;
-				case 'c': get_char(p, &ap);break;
+				case 'd': p = get_int(p, &ap);break;
+				case 's': p = get_string(p, &ap);break;
+				case 'c': p = get_char(p, &ap);break;
 			}
 			fmt++;
 		}
@@ -62,7 +62,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 }
 
 int printf(const char *fmt, ...) {
-  char out[2048];
+  char out[1024];
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(out, fmt, ap);
@@ -81,7 +81,6 @@ int sprintf(char *out, const char *fmt, ...) {
 	make_out(out, fmt, ap);
 	va_end(ap);
 	return 0;
-  //panic("Not implemented");
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {

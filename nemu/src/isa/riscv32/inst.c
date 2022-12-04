@@ -77,7 +77,7 @@ static int decode_exec(Decode *s) {
   s->dnpc = s->snpc;
 
 #define CSR *csr_register(imm)
-#define ECALL isa_raise_intr(-1, cpu.pc)
+#define ECALL isa_raise_intr(0x17, cpu.pc)
 #define INSTPAT_INST(s) ((s)->isa.inst.val)
 #define INSTPAT_MATCH(s, name, type, ... /* execute body */ ) { \
   decode_operand(s, &dest, &src1, &src2, &imm, concat(TYPE_, type)); \

@@ -60,6 +60,7 @@ static vaddr_t *csr_register(word_t imm) {
 			return &(cpu.csr.mcause);
 			break;
 		case 0x305:
+			assert(0);
 			return &(cpu.csr.mtvec);
 			break;
 		case 0x300:

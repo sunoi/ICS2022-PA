@@ -50,7 +50,7 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
 		case TYPE_R: src1R(); src2R(); 				 break;
   }
 }
-
+/*
 static vaddr_t *csr_register(word_t imm) {
 	switch (imm) {
 		case 0x341:
@@ -69,14 +69,14 @@ static vaddr_t *csr_register(word_t imm) {
 			panic("error csr imm");
 			break;
 	}
-}
+}*/
 
 static int decode_exec(Decode *s) {
   int dest = 0;
   word_t src1 = 0, src2 = 0, imm = 0;
   s->dnpc = s->snpc;
 
-#define CSR *csr_register(imm)
+//#define CSR *csr_register(imm)
 #define ECALL isa_raise_intr(isa_reg_str2val("a7", &success), cpu.pc)
 #define INSTPAT_INST(s) ((s)->isa.inst.val)
 #define INSTPAT_MATCH(s, name, type, ... /* execute body */ ) { \
@@ -106,7 +106,7 @@ static int decode_exec(Decode *s) {
 	INSTPAT("??????? ????? ????? 010 ????? 00100 11", slti   , I, R(dest) = (int)src1 < (int)imm ? 1 : 0);
 	INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, bool success = false; s->dnpc = ECALL);
 	INSTPAT("??????? ????? ????? 011 ????? 11100 11", csrrs  , I, /*R(dest) = CSR; CSR = (CSR | src1)*/);
-	INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, R(dest) = CSR; CSR = src1);
+	//INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, R(dest) = CSR; CSR = src1);
 
   INSTPAT("??????? ????? ????? 010 ????? 01000 11", sw     , S, Mw(src1 + imm, 4, src2));
 	INSTPAT("??????? ????? ????? 000 ????? 01000 11", sb     , S, Mw(src1 + imm, 1, src2));

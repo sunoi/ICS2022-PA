@@ -77,7 +77,7 @@ static int decode_exec(Decode *s) {
   s->dnpc = s->snpc;
 
 #define CSR *csr_register(imm)
-#define ECALL isa_raise_intr(18, cpu.pc)
+#define ECALL isa_raise_intr(isa_reg_str2val("a7", &success), cpu.pc)
 #define INSTPAT_INST(s) ((s)->isa.inst.val)
 #define INSTPAT_MATCH(s, name, type, ... /* execute body */ ) { \
   decode_operand(s, &dest, &src1, &src2, &imm, concat(TYPE_, type)); \
@@ -104,7 +104,7 @@ static int decode_exec(Decode *s) {
 	INSTPAT("??????? ????? ????? 100 ????? 00100 11", xori   , I, R(dest) = src1 ^ imm);
 	INSTPAT("??????? ????? ????? 110 ????? 00100 11", ori    , I, R(dest) = src1 | imm);
 	INSTPAT("??????? ????? ????? 010 ????? 00100 11", slti   , I, R(dest) = (int)src1 < (int)imm ? 1 : 0);
-	INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, s->dnpc = ECALL);
+	INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, bool success = false; s->dnpc = ECALL);
 	INSTPAT("??????? ????? ????? 010 ????? 11100 11", csrrs  , I, R(dest) = CSR; CSR = CSR | src1);
 	INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, R(dest) = CSR; CSR = src1);
 

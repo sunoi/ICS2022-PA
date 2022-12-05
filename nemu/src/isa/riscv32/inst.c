@@ -60,12 +60,14 @@ static vaddr_t *csr_register(word_t imm) {
 			return &(cpu.csr.mcause);
 			break;
 		case 0x305:
+			assert(0);
 			return &(cpu.csr.mtvec);
 			break;
 		case 0x300:
 			return &(cpu.csr.mstatus);
 			break;
 		default:
+			assert(0);
 			panic("error csr imm");
 			break;
 	}

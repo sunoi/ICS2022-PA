@@ -31,7 +31,6 @@ int main() {
 
 #ifdef HAS_CTE
   yield();
-	putch('j');
 #endif
 	
   panic("Should not reach here");

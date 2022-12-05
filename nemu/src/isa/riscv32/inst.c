@@ -54,16 +54,16 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
 static vaddr_t *csr_register(word_t imm) {
 	switch (imm) {
 		case 0x341:
-			return &(csr.mepc);
+			return &(cpu.csr.mepc);
 			break;
 		case 0x342:
-			return &(csr.mcause);
+			return &(cpu.csr.mcause);
 			break;
 		case 0x305:
-			return &(csr.mtvec);
+			return &(cpu.csr.mtvec);
 			break;
 		case 0x300:
-			return &(csr.mstatus);
+			return &(cpu.csr.mstatus);
 			break;
 		default:
 			panic("error csr imm");

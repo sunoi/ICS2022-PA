@@ -21,6 +21,7 @@ int main() {
 
 #ifdef HAS_CTE
   init_irq();
+	putch('j');
 #endif
 
   init_fs();

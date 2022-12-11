@@ -15,8 +15,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr ehdr;
 	ramdisk_read(&ehdr, 0, sizeof(ehdr));
 	size_t phnum = ehdr.e_phnum;
-	printf("114514");
-	printf("%x\n", phnum);
+	printf("%d\n", phnum);
+	printf("111111111111111111111\n");
   return 0;
 }
 

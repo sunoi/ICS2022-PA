@@ -62,7 +62,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 }
 
 int printf(const char *fmt, ...) {
-  char out[120000];
+  char out[120010];
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(out, fmt, ap);

@@ -17,7 +17,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
 	size_t phnum = ehdr.e_phnum;
 	size_t ehsize = ehdr.e_ehsize;
-	printf("%d\n", ehdr.e_machine);
+	printf("%d\n", ehdr.e_version);
 
 	Elf_Phdr phdr[phnum];
 	ramdisk_read(&phdr, ehsize, sizeof(phdr)*phnum);

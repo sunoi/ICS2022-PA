@@ -20,12 +20,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	//size_t phoff = ehdr.e_phoff;
 
 	Elf_Phdr phdr[phnum];
-	size_t offset = ramdisk_read(&phdr, ehsize, sizeof(phdr)*phnum);
-	printf("%d\n", offset);
+	ramdisk_read(&phdr, ehsize, sizeof(phdr)*phnum);
 	for (size_t i = 0; i < phnum; i++) {
 		if (phdr[i].p_type == PT_LOAD) {
 			ramdisk_read((void*)phdr[i].p_vaddr, phdr[i].p_offset, phdr[i].p_memsz);
-			memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz), 0, phdr[i].p_memsz-phdr[i].p_filesz);
+			//memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz), 0, phdr[i].p_memsz-phdr[i].p_filesz);
 		}
 	}
   return ehdr.e_entry;

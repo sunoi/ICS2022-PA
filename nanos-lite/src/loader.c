@@ -14,7 +14,7 @@ size_t ramdisk_write(void* buf, size_t offset, size_t len);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr ehdr;
-	ramdisk_read(&ehdr, 0, sizeof(ehdr));
+	ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
 	size_t phnum = ehdr.e_phnum;
 	size_t phoff = ehdr.e_phoff;
 	Elf_Phdr phdr[phnum];

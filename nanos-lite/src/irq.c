@@ -2,7 +2,7 @@
 #include "syscall.h"
 
 static Context* do_event(Event e, Context* c) {
-  printf("%d\n", EVENT_ERROR);
+  //printf("%d\n", EVENT_ERROR);
 	switch (e.event) {
 		case EVENT_YIELD:
 			Log("Trriger yield.");

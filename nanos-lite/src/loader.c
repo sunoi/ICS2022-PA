@@ -28,7 +28,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		}
 	}
 	printf("%d\n", ehdr.e_entry);
-  return 0x83000c8;
+  return 0x830000c8;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {

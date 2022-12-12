@@ -4,7 +4,7 @@
 void SYS_yield(Context *c) {
 	yield();
 	c->GPRx = 0;
-	c->mepc += 4;
+	//c->mepc += 4;
 }
 
 void SYS_exit(Context *c) {
@@ -15,7 +15,6 @@ void SYS_exit(Context *c) {
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-	printf("%d\n", a[0]);
   switch (a[0]) {
 		case 0:
 			SYS_yield(c);

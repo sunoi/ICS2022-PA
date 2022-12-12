@@ -21,6 +21,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	ramdisk_read(&phdr, phoff, sizeof(phdr)*phnum);
 	for (size_t i = 0; i < phnum; i++) {
 		if (phdr[i].p_type == PT_LOAD) {
+			printf("%d\n", phdr[i].p_vaddr);
 			ramdisk_read((void*)phdr[i].p_vaddr, phdr[i].p_offset, phdr[i].p_memsz);
 			memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz), 0, phdr[i].p_memsz-phdr[i].p_filesz);
 		}
@@ -30,7 +31,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
 void naive_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
-  Log("Jump to entry = %d", entry);
+  Log("Jump to entry = %p", entry);
   ((void(*)())entry) ();
 }
 

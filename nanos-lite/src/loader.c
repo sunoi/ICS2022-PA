@@ -20,7 +20,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	//size_t entry = ehdr.e_entry;
 
 	Elf_Phdr phdr[phnum];
-	printf("%d\n", sizeof(Elf_Phdr));
 	ramdisk_read(&phdr, ehsize, sizeof(Elf_Phdr)*phnum);
 	for (size_t i = 0; i < phnum; i++) {
 		if (phdr[i].p_type == PT_LOAD) {
@@ -33,7 +32,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
 void naive_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
-  Log("Jump to entry = %d", entry);
+  Log("Jump to entry = %p", entry);
   ((void(*)())entry) ();
 }
 

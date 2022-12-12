@@ -20,7 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	//size_t entry = ehdr.e_entry;
 
 	Elf_Phdr phdr[phnum];
-	ramdisk_read(phdr, ehsize, sizeof(Elf_Phdr)*phnum);
+	ramdisk_read(&phdr, ehsize, sizeof(Elf_Phdr)*phnum);
 	for (size_t i = 0; i < phnum; i++) {
 		if (phdr[i].p_type == PT_LOAD) {
 			ramdisk_read((void*)phdr[i].p_vaddr, phdr[i].p_offset, phdr[i].p_memsz);
@@ -28,7 +28,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		}
 	}
 	return ehdr.e_entry;
-  //return entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {

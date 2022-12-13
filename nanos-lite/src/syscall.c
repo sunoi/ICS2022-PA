@@ -15,11 +15,11 @@ void sys_exit(Context *c) {
 void sys_write(Context *c) {
 	int fd = c->GPR2;
 	if (fd == 1 || fd == 2) {
-		intptr_t buf = c->GPR3;
+		char* buf = (char*)c->GPR3;
 		size_t len = c->GPR4;
 		//printf("len=%d\n", len);
-		for (size_t i = 0; i < len+10; i++) {
-			putch((char)('A'+buf));
+		for (size_t i = 0; i < len; i++) {
+			putch(*buf);
 			buf++;
 		}
 		c->GPRx = len;

@@ -14,7 +14,15 @@ void sys_exit(Context *c) {
 
 void sys_write(Context *c) {
 	int fd = c->GPR2;
-	printf("fd=%d\n", fd);
+	if (fd == 1 || fd == 2) {
+		intptr_t buf = c->GPR3;
+		int len = c->GPR4;
+		for (int i = 0; i < len; i++) {
+			putch(buf);
+			buf++;
+		}
+	}
+	c->GPRx = 0;
 }
 
 void do_syscall(Context *c) {

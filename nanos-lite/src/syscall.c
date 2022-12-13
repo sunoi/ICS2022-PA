@@ -4,6 +4,7 @@
 void SYS_yield(Context *c) {
 	yield();
 	c->GPRx = 0;
+	c->mepc += 4;
 }
 
 void SYS_exit(Context *c) {

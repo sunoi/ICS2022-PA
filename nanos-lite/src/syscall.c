@@ -17,7 +17,7 @@ void sys_write(Context *c) {
 	if (fd == 1 || fd == 2) {
 		intptr_t buf = c->GPR3;
 		size_t len = c->GPR4;
-		printf("len=%d\n", len);
+		//printf("len=%d\n", len);
 		for (size_t i = 0; i < len; i++) {
 			putch(buf);
 			buf++;

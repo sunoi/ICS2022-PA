@@ -23,7 +23,6 @@ void sys_write(Context *c) {
 		}
 	}
 	c->GPRx = 0;
-	assert(0);
 }
 
 void do_syscall(Context *c) {
@@ -42,4 +41,5 @@ void do_syscall(Context *c) {
 			break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
+	assert(0);
 }

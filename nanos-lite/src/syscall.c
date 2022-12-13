@@ -19,7 +19,7 @@ void sys_write(Context *c) {
 		size_t len = c->GPR4;
 		//printf("len=%d\n", len);
 		for (size_t i = 0; i < len+10; i++) {
-			putch((char)('a'+buf));
+			putch((char)('A'+buf));
 			buf++;
 		}
 		c->GPRx = len;

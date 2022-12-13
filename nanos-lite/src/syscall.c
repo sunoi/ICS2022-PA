@@ -21,8 +21,8 @@ void sys_write(Context *c) {
 			putch(buf);
 			buf++;
 		}
+		c->GPRx = len;
 	}
-	c->GPRx = 0;
 }
 
 void do_syscall(Context *c) {

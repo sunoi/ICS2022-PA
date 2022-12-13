@@ -14,7 +14,7 @@ void sys_exit(Context *c) {
 
 void sys_write(Context *c) {
 	int fd = c->GPR2;
-	printf("%d\n", fd);
+	printf("fd=%d\n", fd);
 }
 
 void do_syscall(Context *c) {

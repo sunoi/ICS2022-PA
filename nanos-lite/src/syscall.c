@@ -17,10 +17,10 @@ void do_syscall(Context *c) {
   a[0] = c->GPR1;
 	printf("a[0]=%d\n", a[0]);
   switch (a[0]) {
-		case 0:
+		case 1:
 			SYS_yield(c);
 			break;
-		case 1:
+		case 0:
 			SYS_exit(c);
 			break;
     default: panic("Unhandled syscall ID = %d", a[0]);

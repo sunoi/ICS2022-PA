@@ -24,7 +24,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr ehdr;
 	ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
 	//printf("%s\n", filename);
-	int fd = fs_open(filename, 0, 0);
+	//int fd = fs_open(filename, 0, 0);
 	//if (fd < 0) assert(0);
 	//fs_lseek(fd, 0, SEEK_SET);
 	//fs_read(fd, &ehdr, sizeof(Elf_Ehdr));
@@ -34,8 +34,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	size_t phoff = ehdr.e_phoff;
 	//size_t entry = ehdr.e_entry;
 	Elf_Phdr phdr[phnum];
-	size_t disk_offset = fs_disk_offset(fd);
-	ramdisk_read(&phdr, disk_offset+phoff, sizeof(Elf_Phdr)*phnum);
+	//size_t disk_offset = fs_disk_offset(fd);
+	ramdisk_read(&phdr, phoff, sizeof(Elf_Phdr)*phnum);
 
 	for (size_t i = 0; i < phnum; i++) {
 		if (phdr[i].p_type == PT_LOAD) {

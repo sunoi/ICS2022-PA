@@ -42,6 +42,7 @@ void init_fs() {
 }
 
 int fs_open(const char *pathname, int flags, int mdoe) {
+	printf("%d\n",file_number);
 	for (int i = 0; i < file_number; i++) {
 		if (strcmp(pathname, file_table[i].name) == 0) {
 			return i;

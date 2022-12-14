@@ -27,8 +27,11 @@ void sys_write(Context *c) {
 }
 
 void sys_brk(Context *c) {
+	intptr_t addr = c->GPR2;
+	printf("%d\n", addr);
 	return;
 }
+
 
 void do_syscall(Context *c) {
   uintptr_t a[4];

@@ -72,17 +72,21 @@ void do_syscall(Context *c) {
 	//printf("%d\n", a[0]);
   switch (a[0]) {
 		case 0:
-			sys_yield(c);
-			break;
+			sys_yield(c);break;
 		case 1:
-			sys_exit(c);
-			break;
+			sys_exit(c);break;
+		case 2:
+			sys_open(c);break;
+		case 3:
+			sys_read(c);break;
 		case 4:
-			sys_write(c);
-			break;
+			sys_write(c);break;
+		case 7:
+			sys_close(c);break;
+		case 8:
+			sys_lseek(c);break;
 		case 9:
-			sys_brk(c);
-			break;
+			sys_brk(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }

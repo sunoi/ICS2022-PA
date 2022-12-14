@@ -42,13 +42,14 @@ void init_fs() {
 }
 
 int fs_open(const char *pathname, int flags, int mdoe) {
+	int fd = -1;
 	for (int i = 0; i < file_number; i++) {
 		printf("%s\n", file_table[i].name);
 		if (strcmp(pathname, file_table[i].name) == 0) {
-			return i;
+			fd = i;
 		}
 	}
-	return -1;
+	return fd;
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {

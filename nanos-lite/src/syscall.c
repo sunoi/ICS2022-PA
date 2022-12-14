@@ -26,10 +26,13 @@ void sys_write(Context *c) {
 	}
 }
 
+void sys_brk(Context *c) {
+	return;
+}
+
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-	//printf("a[0]=%d\n", a[0]);
   switch (a[0]) {
 		case 0:
 			sys_yield(c);
@@ -39,6 +42,9 @@ void do_syscall(Context *c) {
 			break;
 		case 4:
 			sys_write(c);
+			break;
+		case 9:
+			sys_brk(c);
 			break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }

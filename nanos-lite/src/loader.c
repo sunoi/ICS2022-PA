@@ -23,7 +23,7 @@ size_t fs_disk_offset(int fd);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr ehdr;
 	//ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
-	//printf("%s\n", filename);
+	printf("%s\n", filename);
 	int fd = fs_open(filename, 0, 0);
 	if (fd < 0) assert(0);
 	fs_lseek(fd, 0, SEEK_SET);

@@ -28,7 +28,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	if (fd < 0) assert(0);
 	fs_lseek(fd, 0, SEEK_SET);
 	fs_read(fd, &ehdr, sizeof(Elf_Ehdr));
-	printf("%d\n", fd);
 	char magic[] = {0x7f, 0x45, 0x4c, 0x46, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 	assert(strcmp((char*)ehdr.e_ident, magic) == 0);
 	size_t phnum = ehdr.e_phnum;

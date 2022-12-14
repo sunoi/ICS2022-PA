@@ -26,9 +26,9 @@ void sys_write(Context *c) {
 }
 
 void sys_brk(Context *c) {
-	intptr_t addr = c->GPR2;
+	//intptr_t addr = c->GPR2;
 	c->GPRx = 0;
-	printf("%d\n", addr);
+	//printf("%d\n", addr);
 	return;
 }
 

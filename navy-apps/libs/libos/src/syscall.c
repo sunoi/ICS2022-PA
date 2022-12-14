@@ -69,6 +69,9 @@ extern char _end;
 void *_sbrk(intptr_t increment) {
 	static intptr_t pb = (intptr_t)(&_end);
 	intptr_t npb = pb + increment;
+	if (pb == (intptr_t)&_end) {
+		_syscall_(SYS_brk, pb, 0, 0);
+	}
 	if (_syscall_(SYS_brk, npb, 0 ,0) == 0) {
 		pb = npb;
 		return (void *)pb - increment;

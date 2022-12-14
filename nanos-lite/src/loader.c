@@ -22,26 +22,27 @@ size_t fs_disk_offset(int fd);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr ehdr;
-	ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
-	//printf("%s\n", filename);
-	//int fd = fs_open(filename, 0, 0);
-	//if (fd < 0) assert(0);
-	//fs_lseek(fd, 0, SEEK_SET);
-	//fs_read(fd, &ehdr, sizeof(Elf_Ehdr));
+	//ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
+	printf("%s\n", filename);
+	int fd = fs_open(filename, 0, 0);
+	if (fd < 0) assert(0);
+	fs_lseek(fd, 0, SEEK_SET);
+	fs_read(fd, &ehdr, sizeof(Elf_Ehdr));
 	char magic[] = {0x7f, 0x45, 0x4c, 0x46, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 	assert(strcmp((char*)ehdr.e_ident, magic) == 0);
 	size_t phnum = ehdr.e_phnum;
 	size_t phoff = ehdr.e_phoff;
 	//size_t entry = ehdr.e_entry;
+	
 	Elf_Phdr phdr[phnum];
-	//size_t disk_offset = fs_disk_offset(fd);
-	ramdisk_read(&phdr, phoff, sizeof(Elf_Phdr)*phnum);
+	size_t disk_offset = fs_disk_offset(fd);
+	ramdisk_read(&phdr, disk_offset+phoff, sizeof(Elf_Phdr)*phnum);
 
 	for (size_t i = 0; i < phnum; i++) {
 		if (phdr[i].p_type == PT_LOAD) {
-			//fs_lseek(fd, phdr[i].p_offset, SEEK_SET);
-			//fs_read(fd, (void*)phdr[i].p_vaddr, phdr[i].p_filesz);
-			ramdisk_read((void*)phdr[i].p_vaddr, phdr[i].p_offset, phdr[i].p_memsz);
+			fs_lseek(fd, phdr[i].p_offset, SEEK_SET);
+			fs_read(fd, (void*)phdr[i].p_vaddr, phdr[i].p_filesz);
+			//ramdisk_read((void*)phdr[i].p_vaddr, phdr[i].p_offset, phdr[i].p_memsz);
 			memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz), 0, phdr[i].p_memsz-phdr[i].p_filesz);
 		}
 	}

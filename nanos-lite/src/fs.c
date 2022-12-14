@@ -96,3 +96,7 @@ int fs_close(int fd) {
 	file_table[fd].open_offset = 0;
 	return 0;
 }
+
+size_t fs_disk_offset(int fd) {
+	return file_table[fd].disk_offset;
+}

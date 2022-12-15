@@ -21,7 +21,7 @@ int main() {
     fprintf(fp, "%d\n", i + 1 + 1000);
   }
 	
-	fseek(fp, 1, SEEK_CUR);
+	fseek(fp, 0, SEEK_CUR);
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);

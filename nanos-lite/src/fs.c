@@ -109,9 +109,13 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
 }
 
 int fs_close(int fd) {
-	file_table[fd].open_offset = 0;
-	printf("here\n");
-	return 0;
+	if (fd >= 3) {
+		file_table[fd].open_offset = 0;
+		return 0;
+	}
+	else {
+		return -1;
+	}
 }
 
 size_t fs_disk_offset(int fd) {

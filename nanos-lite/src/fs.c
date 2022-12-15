@@ -35,7 +35,7 @@ static Finfo file_table[] __attribute__((used)) = {
 #include "files.h"
 };
 
-int file_number = sizeof(file_table) / sizeof(Finfo);
+int file_number = sizeof(file_table) / sizeof(Finfo) - 1;
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb

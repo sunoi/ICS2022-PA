@@ -17,10 +17,9 @@ int main() {
   }
 
   fseek(fp, 0, SEEK_SET);
-	printf("jilesize=%ld\n", size);
-  for (i = 0; i < 500; i ++) {
+  for (i = 0; i < 5000; i ++) {
 		size = ftell(fp);
-    fprintf(fp, "%4d\n", i + 1 + 1000);
+    fprintf(fp, "%d\n", i + 1 + 1000);
 		printf("i=%d, size=%ld\n", i, size);
   }
 

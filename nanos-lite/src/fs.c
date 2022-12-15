@@ -61,9 +61,10 @@ size_t fs_read(int fd, void *buf, size_t len) {
 	
 	//printf("read_offset=%d\n", open_offset);
 	//printf("fs_read = %d,%d,%d\n", disk_offset, open_offset, size);
-	if (len > size - open_offset) 
+	if (len > size - open_offset){ 
 		len = size - open_offset;
-
+		printf("jile\n");
+	}
 	ramdisk_read(buf, open_offset + disk_offset, len);
 	file_table[fd].open_offset += len;
 	return len;
@@ -74,7 +75,6 @@ size_t fs_write(int fd, const void *buf, size_t len) {
 	size_t open_offset = file_table[fd].open_offset;
 	size_t size = file_table[fd].size;
 	
-	printf("write_offset=%d\n", open_offset);
 	if (len > size - open_offset)
 		len = size - open_offset;
 

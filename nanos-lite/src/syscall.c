@@ -19,17 +19,18 @@ void sys_exit(Context *c) {
 
 void sys_write(Context *c) {
 	int fd = c->GPR2;
-	printf("%d", fd);
-	if (fd == 1 || fd == 2) {
+	//if (fd == 1 || fd == 2) {
 		char* buf = (char*)c->GPR3;
-		size_t len = c->GPR4;
+		size_t count = c->GPR4;
 		//printf("len=%d\n", len);
-		for (size_t i = 0; i < len; i++) {
+		/*for (size_t i = 0; i < len; i++) {
 			putch(*buf);
 			buf++;
-		}
-		c->GPRx = len;
-	}
+		}*/
+		int success = 0;
+		success = fs_write(fd, (const void*)buf, count);
+		c->GPRx = success;
+	//}
 }
 
 void sys_brk(Context *c) {

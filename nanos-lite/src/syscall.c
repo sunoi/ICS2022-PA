@@ -26,6 +26,7 @@ void sys_write(Context *c) {
 			putch(*buf);
 			buf++;
 		}
+		c->GPRx = count;
 	}
 	else c->GPRx = fs_write(fd, (const void*)buf, count);
 }

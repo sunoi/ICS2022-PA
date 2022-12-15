@@ -13,14 +13,16 @@ int main() {
   int i, n;
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
+		size = ftell(fp);
+		printf("size=%ld\n", size);
     assert(n == i + 1);
   }
 
   fseek(fp, 0, SEEK_SET);
-  for (i = 0; i < 1000; i ++) {
-		size = ftell(fp);
+  for (i = 0; i < 500; i ++) {
+		//size = ftell(fp);
     fprintf(fp, "%4d\n", i + 1 + 1000);
-		printf("i=%d, size=%ld\n", i, size);
+		//printf("i=%d, size=%ld\n", i, size);
   }
 
   for (i = 500; i < 1000; i ++) {

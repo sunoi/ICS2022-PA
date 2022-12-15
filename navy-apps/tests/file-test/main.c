@@ -17,6 +17,8 @@ int main() {
   }
 
   fseek(fp, 0, SEEK_SET);
+	size = ftell(fp);
+	printf("startsize=%ld\n", size);
   for (i = 0; i < 500; i ++) {
 		size = ftell(fp);
     fprintf(fp, "%4d\n", i + 1 + 1000);

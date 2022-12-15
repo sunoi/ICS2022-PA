@@ -40,6 +40,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	ramdisk_read(&phdr, disk_offset+phoff, sizeof(Elf_Phdr)*phnum);
 
 	for (size_t i = 0; i < phnum; i++) {
+		printf("type=%d\n", phdr[i].p_type);
 		if (phdr[i].p_type == PT_LOAD) {
 			fs_lseek(fd, phdr[i].p_offset, SEEK_SET);
 			fs_read(fd, (void*)phdr[i].p_vaddr, phdr[i].p_filesz);

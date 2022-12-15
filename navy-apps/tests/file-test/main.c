@@ -15,7 +15,8 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
-
+	size = ftell(fp);
+	printf("beforesize=%ld\n", size);
   fseek(fp, 0, SEEK_SET);
 	size = ftell(fp);
 	printf("startsize=%ld\n", size);

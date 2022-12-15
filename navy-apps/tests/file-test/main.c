@@ -21,7 +21,6 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
 	
-	fseek(fp, ftell(fp)+5, SEEK_SET);
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);

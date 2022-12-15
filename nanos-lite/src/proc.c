@@ -1,6 +1,5 @@
 #include <proc.h>
 #include <am.h>
-#include "syscall.h"
 
 #define MAX_NR_PROC 4
 

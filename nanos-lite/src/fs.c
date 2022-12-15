@@ -70,19 +70,6 @@ size_t fs_read(int fd, void *buf, size_t len) {
 }
 
 size_t fs_write(int fd, const void *buf, size_t len) {
-	/*if (file_table[fd].write != NULL) {
-		file_table[fd].write(buf, file_table[fd].open_offset, len);
-	}*/
-	/*
-	if (fd == 1 || fd == 2) {
-		for (size_t i = 0; i < len; i++) {
-			putch((char)*buf);
-			buf++;
-		}
-		file_table[fd].open_offset += len;
-		return len;
-	}*/
-
 	size_t disk_offset = file_table[fd].disk_offset;
 	size_t open_offset = file_table[fd].open_offset;
 	size_t size = file_table[fd].size;

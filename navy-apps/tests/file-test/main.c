@@ -23,9 +23,10 @@ int main() {
 
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
+		printf("i=%d, n=%d\n", i, n);
     assert(n == i + 1);
   }
-	printf("jile\n");
+
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);

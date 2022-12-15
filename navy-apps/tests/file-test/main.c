@@ -20,7 +20,8 @@ int main() {
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
-	long size = ftell(fp);
+	size = ftell(fp);
+	printf("size=%d\n", size);
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);

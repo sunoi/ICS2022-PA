@@ -17,13 +17,13 @@ int main() {
   }
 
   fseek(fp, 0, SEEK_SET);
-  for (i = 0; i < 500; i ++) {
+  /*for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
-  }
+  }*/
 
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
-    //assert(n == i + 1);
+    assert(n == i + 1);
   }
 
   fseek(fp, 0, SEEK_SET);

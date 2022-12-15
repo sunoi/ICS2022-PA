@@ -52,6 +52,9 @@ int fs_open(const char *pathname, int flags, int mdoe) {
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {
+	if (file_table[fd].write != NULL)
+		return file_table[fd].read(buf, file_table[fd].open_offset, len);
+
 	size_t disk_offset = file_table[fd].disk_offset;
 	size_t open_offset = file_table[fd].open_offset;
 	size_t size = file_table[fd].size;

@@ -19,7 +19,7 @@ void sys_exit(Context *c) {
 
 void sys_write(Context *c) {
 	int fd = c->GPR2;
-	printf("%d\n", fd);
+	printf("%d", fd);
 	if (fd == 1 || fd == 2) {
 		char* buf = (char*)c->GPR3;
 		size_t len = c->GPR4;

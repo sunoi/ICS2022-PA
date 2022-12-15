@@ -39,6 +39,7 @@ int file_number = sizeof(file_table) / sizeof(Finfo) - 1;
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+	
 }
 
 int fs_open(const char *pathname, int flags, int mdoe) {

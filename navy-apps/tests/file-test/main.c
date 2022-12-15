@@ -15,15 +15,10 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
-	size = ftell(fp);
-	printf("beforesize=%ld\n", size);
+
   fseek(fp, 0, SEEK_SET);
-	size = ftell(fp);
-	printf("startsize=%ld\n", size);
   for (i = 0; i < 500; i ++) {
-		size = ftell(fp);
     fprintf(fp, "%4d\n", i + 1 + 1000);
-		printf("i=%d, size=%ld\n", i, size);
   }
 
   for (i = 500; i < 1000; i ++) {

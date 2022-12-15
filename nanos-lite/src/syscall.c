@@ -19,7 +19,8 @@ void sys_exit(Context *c) {
 
 void sys_write(Context *c) {
 	int fd = c->GPR2;
-	if (fd == 1 || fd == 2) {
+	printf("%d\n", fd);
+	//if (fd == 1 || fd == 2) {
 		char* buf = (char*)c->GPR3;
 		size_t count = c->GPR4;
 		//printf("len=%d\n", len);
@@ -30,7 +31,7 @@ void sys_write(Context *c) {
 		int success = 0;
 		success = fs_write(fd, (const void*)buf, count);
 		c->GPRx = success;
-	}
+	//}
 }
 
 void sys_brk(Context *c) {

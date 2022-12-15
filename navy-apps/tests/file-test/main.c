@@ -20,7 +20,7 @@ int main() {
   for (i = 0; i < 500; i ++) {
 		size = ftell(fp);
     fprintf(fp, "%4d\n", i + 1 + 1000);
-		printf("size=%ld\n", size);
+		printf("i=%d, size=%ld\n", i, size);
   }
 
   for (i = 500; i < 1000; i ++) {

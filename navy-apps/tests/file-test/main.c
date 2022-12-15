@@ -20,7 +20,7 @@ int main() {
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
-	printf("%d\n", n);
+	printf("n=%d\n", n);
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
 		printf("i=%d,n=%d\n", i, n);

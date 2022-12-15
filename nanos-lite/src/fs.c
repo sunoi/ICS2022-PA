@@ -42,8 +42,9 @@ void init_fs() {
 }
 
 int fs_open(const char *pathname, int flags, int mdoe) {
+	printf("%d\n", file_number);
 	for (int i = 0; i < file_number; i++) {
-		//printf("%s\n", file_table[i].name);
+		printf("%s\n", file_table[i].name);
 		if (strcmp(pathname, file_table[i].name) == 0) {
 			return i;
 		}
@@ -56,7 +57,7 @@ size_t fs_read(int fd, void *buf, size_t len) {
 	size_t open_offset = file_table[fd].open_offset;
 	size_t size = file_table[fd].size;
 
-	printf("fs_read = %d,%d,%d\n", disk_offset, open_offset, size);
+	//printf("fs_read = %d,%d,%d\n", disk_offset, open_offset, size);
 	if (len > size - open_offset) 
 		len = size - open_offset;
 

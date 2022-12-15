@@ -63,7 +63,6 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 
 int printf(const char *fmt, ...) {
   char out[10000];
-	putstr("toutou\n");
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(out, fmt, ap);

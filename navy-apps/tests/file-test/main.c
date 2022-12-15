@@ -19,9 +19,9 @@ int main() {
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
+		size = ftell(fp);
+		printf("size=%ld\n", size);
   }
-	size = ftell(fp);
-	printf("size=%ld\n", size);
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);

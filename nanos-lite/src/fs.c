@@ -64,6 +64,7 @@ size_t fs_read(int fd, void *buf, size_t len) {
 	if (len > size - open_offset){
 		printf("len=%d\n", len);
 		len = size - open_offset;
+		printf("newlen=%d\n", len);
 		printf("jile\n");
 	}
 	ramdisk_read(buf, open_offset + disk_offset, len);

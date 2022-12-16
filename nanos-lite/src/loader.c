@@ -34,7 +34,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	size_t phoff = ehdr.e_phoff;
 	//size_t entry = ehdr.e_entry;
 	//printf("%d\n", entry);
-
+	assert(0);
 	Elf_Phdr phdr[phnum];
 	size_t disk_offset = fs_disk_offset(fd);
 	ramdisk_read(&phdr, disk_offset+phoff, sizeof(Elf_Phdr)*phnum);

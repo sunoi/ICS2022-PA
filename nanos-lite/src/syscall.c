@@ -75,10 +75,10 @@ void do_syscall(Context *c) {
   a[0] = c->GPR1;
 	printf("a[0]=%d\n", a[0]);
   switch (a[0]) {
-		case 1:
-			sys_yield(c);break;
 		case 0:
 			sys_exit(c);break;
+		case 1:
+			sys_yield(c);break;
 		case 2:
 			sys_open(c);break;
 		case 3:

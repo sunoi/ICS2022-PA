@@ -20,7 +20,7 @@ int NDL_PollEvent(char *buf, int len) {
  	int fd = open("/dev/events", 0, 0);
 	int ret = read(fd, buf, len);
 	close(fd);
-	printf("fd=%d\n",fd);
+	printf("ret=%d\n",ret);
 	return ret;
 }
 

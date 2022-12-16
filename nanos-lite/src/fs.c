@@ -109,6 +109,7 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
 }
 
 int fs_close(int fd) {
+	printf("close=%s\n", file_table[fd].name);
 	if (fd >= 3) {
 		//printf("Here!\n");
 		file_table[fd].open_offset = 0;

@@ -7,6 +7,7 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t serial_write(const void *buf, size_t offset, size_t len);
 size_t events_read(void *buf, size_t offset, size_t len);
+
 typedef struct {
   char *name;
   size_t size;
@@ -50,7 +51,7 @@ void init_fs() {
 
 int fs_open(const char *pathname, int flags, int mdoe) {
 	for (int i = 0; i < file_number; i++) {
-		printf("%s\n", file_table[i].name);
+		printf("%d, %s\n", i, file_table[i].name);
 		if (strcmp(pathname, file_table[i].name) == 0) {
 			return i;
 		}

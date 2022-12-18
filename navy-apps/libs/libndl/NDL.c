@@ -27,7 +27,11 @@ void NDL_OpenCanvas(int *w, int *h) {
   FILE *fp = fopen("/proc/dispinfo", "r");
 	int width = 0, height = 0;
 	fscanf(fp, "width=%d, height=%d", &width, &height);
-
+	
+	if (*w == 0 && *h == 0) {
+		*w = width;
+		*h = height;
+	}
 	if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;

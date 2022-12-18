@@ -25,12 +25,8 @@ size_t invalid_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t invalid_write(const void *buf, size_t offset, size_t len) {
-  char *str = (char*)buf;
-	for (size_t i = 0; i < len; i++) {
-		putch(*str);
-		str++;
-	}
-  return len;
+  panic("should not reach here");
+  return 0;
 }
 
 /* This is the information about all files in disk. */

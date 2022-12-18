@@ -83,7 +83,7 @@ int NDL_Init(uint32_t flags) {
 	evtdev = open("/dev/events", 0, 0);
 	fbdev = open("/dev/fb", 0, 0);
 	dispdev = open("/proc/dispinfo", 0, 0);
-
+	printf("%d\n", dispdev);
   return 0;
 }
 

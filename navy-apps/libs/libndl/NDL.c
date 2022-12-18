@@ -26,7 +26,7 @@ int NDL_PollEvent(char *buf, int len) {
 void NDL_OpenCanvas(int *w, int *h) {
   FILE *fp = fopen("/proc/dispinfo", "r");
 	fscanf(fp, "width=%d, height=%d", &width, &height);
-	
+	printf("width=%d, height=%d\n", width, height);	
 	if (*w == 0 && *h == 0) {
 		*w = width;
 		*h = height;

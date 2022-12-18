@@ -44,12 +44,13 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+	printf("offset=%d\n", offset);
   int width = io_read(AM_GPU_CONFIG).width;
 	int t = offset / 4;
 	int x = t / width;
 	int y = t % width;
 
-	printf("x=%d, y=%d\n", x, y);
+	//printf("x=%d, y=%d\n", x, y);
 	
 	io_write(AM_GPU_FBDRAW, x, y, (void*)buf, len / 4, 1, true);
 	return 0;

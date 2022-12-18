@@ -35,6 +35,7 @@ void sys_open(Context *c) {
 	const char* pathname = (const char*)c->GPR2;
 	int flags = c->GPR3;
 	int mode = c->GPR4;
+	printf("open_pathname = %s\n", pathname);
 	c->GPRx = fs_open(pathname, flags, mode);
 }
 
@@ -74,7 +75,6 @@ void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
 	printf("a[0]=%d\n", a[0]);
-	assert(0);
   switch (a[0]) {
 		case 0:
 			sys_exit(c);break;

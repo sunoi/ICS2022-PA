@@ -37,6 +37,7 @@ void sys_open(Context *c) {
 	int mode = c->GPR4;
 	//printf("open_pathname = %s\n", pathname);
 	c->GPRx = fs_open(pathname, flags, mode);
+	printf("fd = %d\n", c->GPRx);
 }
 
 void sys_read(Context *c) {

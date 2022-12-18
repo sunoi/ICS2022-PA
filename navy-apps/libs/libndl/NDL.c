@@ -8,7 +8,9 @@
 
 static int evtdev = -1;
 static int fbdev = -1;
+static int dispdev = -1;
 static int screen_w = 0, screen_h = 0;
+static int width = 0, height = 0;
 
 uint32_t NDL_GetTicks() {
 	struct timeval now;
@@ -17,14 +19,16 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
- 	int fd = open("/dev/events", 0, 0);
-	int ret = read(fd, buf, len);
-	close(fd);
+	int ret = read(evtdev, buf, len);
 	return ret;
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
-  if (getenv("NWM_APP")) {
+  FILE *fp = fopen("/proc/dispinfo", "r");
+	int width = 0, height = 0;
+	fscanf(fp, "width=%d, height=%d", &width, &height);
+
+	if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;
     screen_w = *w; screen_h = *h;
@@ -64,8 +68,14 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
+	evtdev = open("/dev/events", 0, 0);
+	fbdev = open("/dev/fb", 0, 0);
+	dispdev = open("/proc/dispinfo", 0, 0);
+
   return 0;
 }
 
 void NDL_Quit() {
+	close(evtdev);
+	close(dispdev);
 }

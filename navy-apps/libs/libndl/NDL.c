@@ -48,7 +48,6 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
-	printf("jile\n");
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
@@ -56,10 +55,11 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 		w = width;
 		h = height;
 	}
-		for (int r = 0; r < h; r++) {
-			lseek(fbdev, x+(r+y)*w, SEEK_SET);
-			write(fbdev, pixels+r*w, w);
-		}
+	printf("jile\n");
+	for (int r = 0; r < h; r++) {
+		lseek(fbdev, x+(r+y)*w, SEEK_SET);
+		write(fbdev, pixels+r*w, w);
+	}
 	write(fbdev, 0, 0);
 }
 

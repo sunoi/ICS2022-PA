@@ -25,7 +25,6 @@ int NDL_PollEvent(char *buf, int len) {
 
 void NDL_OpenCanvas(int *w, int *h) {
   FILE *fp = fopen("/proc/dispinfo", "r");
-	int width = 0, height = 0;
 	fscanf(fp, "width=%d, height=%d", &width, &height);
 	
 	if (*w == 0 && *h == 0) {
@@ -52,6 +51,15 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
+	if (w == 0 && h == 0) {
+		w = width;
+		h = height;
+	}
+		for (int r = 0; r < h; r++) {
+			lseek(fbdev, x+(r+y)*w, SEEK_SET);
+			write(fbdev, pixels+r*w, w);
+		}
+	write(fbdev, 0, 0);
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {

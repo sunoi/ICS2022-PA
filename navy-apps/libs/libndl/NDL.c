@@ -31,7 +31,6 @@ void NDL_OpenCanvas(int *w, int *h) {
 		*w = width;
 		*h = height;
 	}
-	assert(0);
 	if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;
@@ -49,6 +48,7 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
+	printf("jile\n");
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {

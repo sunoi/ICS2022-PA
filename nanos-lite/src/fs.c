@@ -123,3 +123,4 @@ int fs_close(int fd) {
 size_t fs_disk_offset(int fd) {
 	return file_table[fd].disk_offset;
 }
+

@@ -50,12 +50,25 @@ void NDL_OpenCanvas(int *w, int *h) {
   }
 }
 
+static int flag = 0;
+static int offset_x = 0;
+static int offset_y = 0;
+
+static void init_offset(int w, int h) {
+	if (!flag) {
+		offset_x = (width - w) / 2;
+		offset_y = (height - h) / 2;
+		flag = 1;
+	}
+}
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-	if (w == 0 && h == 0) {
+	/*if (w == 0 && h == 0) {
 		w = width;
 		h = height;
-	}
-	printf("w=%d,h=%d\n", w, h);
+	}*/
+
+	init_offset(w, h);
+	//printf("w=%d,h=%d\n", w, h);
 	for (int r = 0; r < h; r++) {
 		lseek(fbdev, x+(r+y)*w, SEEK_SET);
 		write(fbdev, pixels+r*w, w);

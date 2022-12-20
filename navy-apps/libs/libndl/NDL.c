@@ -72,7 +72,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 		for (int j = 0; j < w; j++) {
 			color[j] = pixels[i*w+j];
 		}
-		lseek(fbdev, (x+(y+i)*w)*4, SEEK_SET);
+		lseek(fbdev, (x+(y+i)*width)*4, SEEK_SET);
 		write(fbdev, color, w);
 	}
 

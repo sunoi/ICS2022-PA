@@ -26,7 +26,7 @@ int NDL_PollEvent(char *buf, int len) {
 void NDL_OpenCanvas(int *w, int *h) {
   FILE *fp = fopen("/proc/dispinfo", "r");
 	fscanf(fp, "WIDTH:%d, HEIGHT:%d", &width, &height);
-	printf("width=%d, height=%d\n", width, height);	
+	//printf("width=%d, height=%d\n", width, height);	
 	if (*w == 0 && *h == 0) {
 		*w = width;
 		*h = height;
@@ -68,7 +68,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	}*/
 
 	init_offset(w, h);
-	//printf("w=%d,h=%d\n", w, h);
+	printf("w=%d,h=%d\n", w, h);
 	for (int r = 0; r < h; r++) {
 		lseek(fbdev, x+(r+y)*w, SEEK_SET);
 		write(fbdev, pixels+r*w, w);

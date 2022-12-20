@@ -61,21 +61,20 @@ static void init_offset(int w, int h) {
 		flag = 1;
 	}
 }
-void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-	/*if (w == 0 && h == 0) {
-		w = width;
-		h = height;
-	}*/
 
+void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	init_offset(w, h);
-	x = offset_x;
-	y = offset_y;
-	printf("x=%d,y=%d\n", x, y);
-	for (int r = 0; r < h; r++) {
-		lseek(fbdev, x+(r+y)*w, SEEK_SET);
-		write(fbdev, pixels+r*w, w);
+	x += offset_x;
+	y += offset_y;
+	uint32_t color[w];
+	for (int i = 0; i < h; i++) {
+		for (int j = 0; j < w; j++) {
+			color[j] = pixels[i*w+j];
+		}
+		lseek(fbdev, (x+(y+i)*w)*4, SEEK_SET);
+		write(fbdev, color, w * 4);
 	}
-	write(fbdev, 0, 0);
+
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {

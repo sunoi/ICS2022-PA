@@ -9,14 +9,40 @@ static const char *keyname[] = {
 };
 
 int SDL_PushEvent(SDL_Event *ev) {
-  return 0;
+  panic("to be finished");
+	return 0;
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-  return 0;
+	char buf[64];
+	char type[8];
+	char name[16];
+
+	if (!NDL_PollEvent(buf, sizeof(buf)))
+		return 0;
+	
+	sscanf(buf, "%s %s", type, name);
+	int n = sizeof(keyname) / sizeof(char *);
+	for (int i = 0; i < n; i++) {
+		if (strcmp(name, keyname[i]) == 0) {
+			event->key.keysym.sym = i;
+			break;
+		}
+	}
+
+	if (strcmp(type, "ku") == 0) {
+		event->type = SDL_KEYUP;
+		keyState[event->key.keysym.sym] = 0;
+	}
+	else {
+		event->type = SDL_KEYDOWN;
+		keyState[event->key.keysym.sym] = 1;
+	}
+  return 1;
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
+	while(SDL_PollEvent(event) == 0);
   return 1;
 }
 

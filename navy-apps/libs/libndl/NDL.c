@@ -67,14 +67,13 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	x += offset_x;
 	y += offset_y;
 	printf("x=%d, y=%d\n", x, y);
-	printf("w=%d, h=%d\n", w, h);
 	uint32_t color[w];
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {
 			color[j] = pixels[i*w+j];
 		}
 		lseek(fbdev, (x+(y+i)*w)*4, SEEK_SET);
-		write(fbdev, color, w * 4);
+		write(fbdev, color, w);
 	}
 
 }

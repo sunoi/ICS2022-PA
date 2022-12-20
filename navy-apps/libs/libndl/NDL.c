@@ -68,6 +68,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	}*/
 
 	init_offset(w, h);
+	x = offset_x;
+	y = offset_y;
 	printf("x=%d,y=%d\n", x, y);
 	for (int r = 0; r < h; r++) {
 		lseek(fbdev, x+(r+y)*w, SEEK_SET);

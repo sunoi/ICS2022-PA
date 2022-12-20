@@ -27,10 +27,10 @@ void NDL_OpenCanvas(int *w, int *h) {
 	char buf[64];
 	read(dispdev, buf, sizeof(buf));
 	sscanf(buf, "WIDTH:%d\nHEIGHT:%d\n", &width, &height);
-	
+	if (*w == 0 && *h == 0) {
 		*w = width;
 		*h = height;
-	
+	}
 	if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;

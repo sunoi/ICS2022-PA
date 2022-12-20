@@ -31,7 +31,7 @@ void NDL_OpenCanvas(int *w, int *h) {
 		*w = width;
 		*h = height;
 	}
-	printf("w=%d, h=%d\n", *w, *h);
+	//printf("w=%d, h=%d\n", *w, *h);
 	if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;
@@ -67,6 +67,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	init_offset(w, h);
 	x += offset_x;
 	y += offset_y;
+	printf("x=%d, y=%d\n", x, y);
+	printf("w=%d, h=%d\n", w, h);
 	uint32_t color[w];
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {

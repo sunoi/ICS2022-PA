@@ -23,14 +23,14 @@ int SDL_PollEvent(SDL_Event *ev) {
 	static char type[8];
 	static char name[16];
 	memset(buf, 0, sizeof(buf));
-
+	printf("reach here\n");
 	if (NDL_PollEvent(buf, sizeof(buf)) == 0)
 		return 0;
 	
 	memset(type, 0, sizeof(type));
 	memset(name, 0, sizeof(name));
 	sscanf(buf, "%s %s", type, name);
-	printf("type=%s, name=%s\n", type, name);
+	//printf("type=%s, name=%s\n", type, name);
 	int n = sizeof(keyname) / sizeof(char *);
 	for (int i = 0; i < n; i++) {
 		if (strcmp(name, keyname[i]) == 0) {

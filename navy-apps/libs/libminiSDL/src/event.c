@@ -19,13 +19,16 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-	char buf[64];
-	char type[8];
-	char name[16];
+	static char buf[64];
+	static char type[8];
+	static char name[16];
+	memset(buf, 0, sizeof(buf));
 
 	if (!NDL_PollEvent(buf, sizeof(buf)))
 		return 0;
 	
+	memset(type, 0, sizeof(type));
+	memset(name, 0, sizeof(name));
 	sscanf(buf, "%s %s", type, name);
 	int n = sizeof(keyname) / sizeof(char *);
 	for (int i = 0; i < n; i++) {

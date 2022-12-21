@@ -47,12 +47,13 @@ int SDL_PollEvent(SDL_Event *ev) {
 		ev->type = SDL_KEYUP;
 		keyState[ev->key.keysym.sym] = 0;
 	}
+	printf("reach here\n");
   return 1;
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
 	while(SDL_PollEvent(event) == 0);
-	printf("reach here\n");
+	//printf("reach here\n");
   return 1;
 }
 

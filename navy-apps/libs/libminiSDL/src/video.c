@@ -7,6 +7,7 @@
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+	//printf("reach blitsurface\n");
 	int src_x, src_y, src_w, src_h;
 	if (srcrect == NULL) {
 		src_x = 0;
@@ -39,8 +40,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	int dst_offset = dst_x + dst_y * dst_w;
 
 	if (src->format->BitsPerPixel == 32) {
-		uint32_t *src_pixels = src->pixels;
-		uint32_t *dst_pixels = dst->pixels;
+		uint32_t *src_pixels = (uint32_t*)src->pixels;
+		uint32_t *dst_pixels = (uint32_t*)dst->pixels;
 		for (int i = 0; i < src_h; i++) {
 			for (int j = 0; j < src_w; j++) {
 				dst_pixels[dst_offset+j+i*dst->w] = src_pixels[src_offset+j+i*src->w];
@@ -48,8 +49,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 		}
 	}
 	else if (src->format->BitsPerPixel == 8) {
-		uint8_t *src_pixels = src->pixels;
-		uint8_t *dst_pixels = dst->pixels;
+		uint8_t *src_pixels = (uint8_t*)src->pixels;
+		uint8_t *dst_pixels = (uint8_t*)dst->pixels;
 		for (int i = 0; i < src_h; i++)
 			for (int j = 0; j < src_w; j++)
 				dst_pixels[dst_offset+j+i*dst->w] = src_pixels[src_offset+j+i*src->w];
@@ -73,7 +74,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 
 	int offset = x + y * dst->w;
 	if (dst->format->BitsPerPixel == 32) {
-		uint32_t *pixels = dst->pixels;
+		uint32_t *pixels = (uint32_t*)dst->pixels;
 		for (int i = 0; i < h; i++) {
 			for (int j = 0; j < w; j++) {
 				pixels[j+i*dst->w+offset] = color;
@@ -109,7 +110,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	}
 
 	if (s->format->BitsPerPixel == 32) {
-		NDL_DrawRect(s->pixels, x, y, w, h);
+		NDL_DrawRect((uint32_t*)s->pixels, x, y, w, h);
 	}
 	else if (s->format->BitsPerPixel == 0) {
 		uint32_t offset = x + y * s->w;

@@ -44,9 +44,8 @@ void sys_read(Context *c) {
 	int fd = c->GPR2;
 	int count = c->GPR4;
 	char *buf = (char*)c->GPR3;
-	assert(0);
 	c->GPRx = fs_read(fd, (void*)buf, count);
-
+	assert(0);
 }
 
 void sys_lseek(Context *c) {

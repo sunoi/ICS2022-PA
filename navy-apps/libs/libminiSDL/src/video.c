@@ -38,7 +38,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	int src_offset = src_x + src_y * src_w;
 	int dst_offset = dst_x + dst_y * dst_w;
 
-	if (src->format->BitsPerPixel == 32) {
+	/*if (src->format->BitsPerPixel == 32) {
 		uint32_t *src_pixels = src->pixels;
 		uint32_t *dst_pixels = dst->pixels;
 		for (int i = 0; i < src_h; i++) {
@@ -47,12 +47,12 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 			}
 		}
 	}
-	else if (src->format->BitsPerPixel == 8) {
-		uint8_t *spixels = src->pixels;
-		uint8_t *dpixels = dst->pixels;
+	else */if (src->format->BitsPerPixel == 8) {
+		uint8_t *src_pixels = src->pixels;
+		uint8_t *dst_pixels = dst->pixels;
 		for (int i = 0; i < src_h; i++)
 			for (int j = 0; j < src_w; j++)
-				dpixels[dst_offset+j+i*dst->w] = spixels[src_offset+j+i*src->w];
+				dst_pixels[dst_offset+j+i*dst->w] = src_pixels[src_offset+j+i*src->w];
 	}
 }
 
@@ -72,7 +72,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	}
 
 	int offset = x + y * dst->w;
-	if (dst->format->BitsPerPixel == 32) {
+	/*if (dst->format->BitsPerPixel == 32) {
 		uint32_t *pixels = dst->pixels;
 		for (int i = 0; i < h; i++) {
 			for (int j = 0; j < w; j++) {
@@ -80,7 +80,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 			}
 		}
 	}
-	else if (dst->format->BitsPerPixel == 8) {
+	else */if (dst->format->BitsPerPixel == 8) {
 		int n = dst->format->palette->ncolors;
 		uint8_t t;
 		for (t = 0; t < n; t++) {
@@ -108,19 +108,19 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 		h = s->h;
 	}
 
-	if (s->format->BitsPerPixel == 32) {
+	/*if (s->format->BitsPerPixel == 32) {
 		NDL_DrawRect(s->pixels, x, y, w, h);
 	}
-	else if (s->format->BitsPerPixel == 0) {
+	else*/ if (s->format->BitsPerPixel == 0) {
 		uint32_t offset = x + y * s->w;
 		uint32_t *pixels = (uint32_t*)malloc(w * h * sizeof(uint32_t));
 		for (int i = 0; i < h; i++) {
 			for (int j = 0; j < w; j++) {
 				uint32_t val = 0;
-				uint32_t r = s->format->palette->color[s->pixels[j+i*s->w+offset]].r;
-				uint32_t g = s->format->palette->color[s->pixels[j+i*s->w+offset]].g;
-				uint32_t b = s->format->palette->color[s->pixels[j+i*s->w+offset]].b;
-				uint32_t a = s->format->palette->color[s->pixels[j+i*s->w+offset]].a;
+				uint32_t r = s->format->palette->colors[s->pixels[j+i*s->w+offset]].r;
+				uint32_t g = s->format->palette->colors[s->pixels[j+i*s->w+offset]].g;
+				uint32_t b = s->format->palette->colors[s->pixels[j+i*s->w+offset]].b;
+				uint32_t a = s->format->palette->colors[s->pixels[j+i*s->w+offset]].a;
 				val = (a << 24) | (r << 16) | (g << 8) | b;
 				pixels[j+i*w] = val;
 			}

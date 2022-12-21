@@ -1,5 +1,7 @@
 #include <NDL.h>
 #include <SDL.h>
+#include <string.h>
+#include <assert.h>
 
 #define keyname(k) #k,
 
@@ -8,8 +10,11 @@ static const char *keyname[] = {
   _KEYS(keyname)
 };
 
+static char keyState[83] = {};
+
 int SDL_PushEvent(SDL_Event *ev) {
-  panic("to be finished");
+  //panic("to be finished");
+	assert(0);
 	return 0;
 }
 
@@ -25,18 +30,18 @@ int SDL_PollEvent(SDL_Event *ev) {
 	int n = sizeof(keyname) / sizeof(char *);
 	for (int i = 0; i < n; i++) {
 		if (strcmp(name, keyname[i]) == 0) {
-			event->key.keysym.sym = i;
+			ev->key.keysym.sym = i;
 			break;
 		}
 	}
 
 	if (strcmp(type, "ku") == 0) {
-		event->type = SDL_KEYUP;
-		keyState[event->key.keysym.sym] = 0;
+		ev->type = SDL_KEYUP;
+		keyState[ev->key.keysym.sym] = 0;
 	}
 	else {
-		event->type = SDL_KEYDOWN;
-		keyState[event->key.keysym.sym] = 1;
+		ev->type = SDL_KEYDOWN;
+		keyState[ev->key.keysym.sym] = 1;
 	}
   return 1;
 }

@@ -55,10 +55,10 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 			for (int j = 0; j < src_w; j++)
 				dst_pixels[dst_offset+j+i*dst->w] = src_pixels[src_offset+j+i*src->w];
 	}
-	assert(0);
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
+	assert(0);
 	int x, y, w, h;
 	if (dstrect == NULL) {
 		x = 0;

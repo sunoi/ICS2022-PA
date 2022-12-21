@@ -6,7 +6,7 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 
 Context* __am_irq_handle(Context *c) {
 	if (user_handler) {
-		printf("ret=%d\n", c->GPRx);
+		//printf("ret=%d\n", c->GPRx);
     Event ev = {0};
     switch (c->mcause) {
 			case -1:
@@ -18,9 +18,7 @@ Context* __am_irq_handle(Context *c) {
       default: ev.event = EVENT_ERROR; break;
     }
 
-		printf("before, gprx=%d\n", c->GPRx);
     c = user_handler(ev, c);
-		printf("now gprx=%d\n", c->GPRx);
     assert(c != NULL);
   }
 

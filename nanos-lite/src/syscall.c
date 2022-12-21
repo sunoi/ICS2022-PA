@@ -45,6 +45,7 @@ void sys_read(Context *c) {
 	int count = c->GPR4;
 	char *buf = (char*)c->GPR3;
 	c->GPRx = fs_read(fd, (void*)buf, count);
+	printf("jilehere\n");
 }
 
 void sys_lseek(Context *c) {

@@ -69,7 +69,6 @@ void sys_gettimeofday(Context *c) {
 	tv->tv_usec = us - tv->tv_sec * 1000000;
 
 	c->GPRx = 0;
-	assert(0);
 }
 
 void do_syscall(Context *c) {

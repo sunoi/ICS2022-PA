@@ -51,11 +51,11 @@ void init_fs() {
 }
 
 int fs_open(const char *pathname, int flags, int mdoe) {
-	printf("%s\n", pathname);
+	//printf("%s\n", pathname);
 	//printf("filenumber=%d\n", file_number);
 	for (int i = 0; i < file_number; i++) {
+		printf("%s\n", file_table[i].name);
 		if (strcmp(pathname, file_table[i].name) == 0) {
-			printf("%s\n", file_table[i].name);
 			return i;
 		}
 	}

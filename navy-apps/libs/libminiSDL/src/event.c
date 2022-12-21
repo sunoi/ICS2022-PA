@@ -19,7 +19,6 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-	assert(0);
 	static char buf[64];
 	static char type[8];
 	static char name[16];

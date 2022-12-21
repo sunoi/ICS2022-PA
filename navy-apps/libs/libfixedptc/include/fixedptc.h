@@ -137,7 +137,7 @@ static inline fixedpt fixedpt_divi(fixedpt A, int B) {
 
 /* Multiplies two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
-	return A * b / (1 << 8);
+	return A * B / (1 << 8);
 }
 
 

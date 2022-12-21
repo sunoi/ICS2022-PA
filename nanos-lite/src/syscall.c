@@ -64,12 +64,12 @@ void sys_gettimeofday(Context *c) {
 	struct timeval* tv = (struct timeval*)c->GPR2;
 	// struct timezone *tz = (struct timezone*)c->GPR3;
 	uint64_t us = io_read(AM_TIMER_UPTIME).us;
-	assert(0);
 	//printf("%d\n", us);
 	tv->tv_sec = us / 1000000;
 	tv->tv_usec = us - tv->tv_sec * 1000000;
 
 	c->GPRx = 0;
+	assert(0);
 }
 
 void do_syscall(Context *c) {

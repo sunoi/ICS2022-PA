@@ -13,9 +13,9 @@ static int screen_w = 0, screen_h = 0;
 static int width = 0, height = 0;
 
 uint32_t NDL_GetTicks() {
-	struct timeval now;
-	gettimeofday(&now, NULL);
-	return now.tv_sec * 1000 + now.tv_usec / 1000;
+	struct timeval t;
+	gettimeofday(&t, NULL);
+	return t.tv_sec * 1000 + t.tv_usec / 1000;
 }
 
 int NDL_PollEvent(char *buf, int len) {
@@ -54,7 +54,7 @@ static int flag = 0;
 static int offset_x = 0;
 static int offset_y = 0;
 
-static void init_offset(int w, int h) {
+static inline void init_offset(int w, int h) {
 	if (!flag) {
 		offset_x = (width - w) / 2;
 		offset_y = (height - h) / 2;

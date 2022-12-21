@@ -23,10 +23,10 @@ int SDL_PollEvent(SDL_Event *ev) {
 	static char type[8];
 	static char name[16];
 	memset(buf, 0, sizeof(buf));
+	assert(0);
 	if (NDL_PollEvent(buf, sizeof(buf)) == 0)
 		return 0;
 	
-	printf("reach here\n");
 	memset(type, 0, sizeof(type));
 	memset(name, 0, sizeof(name));
 	sscanf(buf, "%s %s", type, name);

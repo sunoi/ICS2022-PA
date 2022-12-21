@@ -83,14 +83,13 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
     }
   }
   else if (dst->format->BitsPerPixel == 8) {
-    // 获取正确的调色板下标
     int n = dst->format->palette->ncolors;
     uint8_t index = 0;
     for (; index < n; ++index) {
       if (dst->format->palette->colors[index].val == color) 
         break;
     }
-    // 向pixels填充下标
+
     uint8_t* pixels = (uint8_t*)dst->pixels;
     for (int i = 0; i < h; ++i) {
       for (int j = 0; j < w; ++j) {

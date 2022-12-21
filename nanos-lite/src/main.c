@@ -16,7 +16,7 @@ int main() {
   init_mm();
 
   init_device();
-
+	assert(0);
   init_ramdisk();
 
 #ifdef HAS_CTE

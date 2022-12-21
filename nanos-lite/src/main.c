@@ -22,7 +22,7 @@ int main() {
 #ifdef HAS_CTE
   init_irq();
 #endif
-	printf("reach here\n");
+
   init_fs();
 
   init_proc();

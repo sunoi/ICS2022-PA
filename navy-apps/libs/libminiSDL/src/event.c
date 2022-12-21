@@ -24,12 +24,13 @@ int SDL_PollEvent(SDL_Event *ev) {
 	static char name[16];
 	memset(buf, 0, sizeof(buf));
 
-	if (!NDL_PollEvent(buf, sizeof(buf)))
+	if (NDL_PollEvent(buf, sizeof(buf)) == 0)
 		return 0;
 	
 	memset(type, 0, sizeof(type));
 	memset(name, 0, sizeof(name));
 	sscanf(buf, "%s %s", type, name);
+	printf("type=%s\n", type);
 	int n = sizeof(keyname) / sizeof(char *);
 	for (int i = 0; i < n; i++) {
 		if (strcmp(name, keyname[i]) == 0) {
@@ -38,13 +39,13 @@ int SDL_PollEvent(SDL_Event *ev) {
 		}
 	}
 
-	if (strcmp(type, "ku") == 0) {
-		ev->type = SDL_KEYUP;
-		keyState[ev->key.keysym.sym] = 0;
-	}
-	else {
+	if (strcmp(type, "kd") == 0) {
 		ev->type = SDL_KEYDOWN;
 		keyState[ev->key.keysym.sym] = 1;
+	}
+	else {
+		ev->type = SDL_KEYUP;
+		keyState[ev->key.keysym.sym] = 0;
 	}
   return 1;
 }

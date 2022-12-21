@@ -63,7 +63,7 @@ int fs_open(const char *pathname, int flags, int mdoe) {
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {
-	printf("%s\n", file_table[fd].name);
+	//printf("%s\n", file_table[fd].name);
 	if (file_table[fd].read != NULL)
 		return file_table[fd].read(buf, file_table[fd].open_offset, len);
 

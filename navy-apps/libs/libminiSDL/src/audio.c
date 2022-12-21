@@ -2,7 +2,6 @@
 #include <SDL.h>
 
 int SDL_OpenAudio(SDL_AudioSpec *desired, SDL_AudioSpec *obtained) {
-  printf("SDL_OpenAudio to be done\n");
 	return 0;
 }
 

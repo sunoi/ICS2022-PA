@@ -19,6 +19,7 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
+	printf("reach here\n");
 	static char buf[64];
 	static char type[8];
 	static char name[16];
@@ -51,7 +52,6 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
-	printf("reach here\n");
 	while(SDL_PollEvent(event) == 0);
   return 1;
 }

@@ -23,7 +23,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 	static char type[8];
 	static char name[16];
 	memset(buf, 0, sizeof(buf));
-	assert(0);
+
 	if (NDL_PollEvent(buf, sizeof(buf)) == 0)
 		return 0;
 	

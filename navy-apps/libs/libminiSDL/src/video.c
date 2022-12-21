@@ -38,8 +38,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   int dst_offset = dst_x + dst_y * dst->w;
 
   if (src->format->BitsPerPixel == 32) {
-    uint32_t* src_pixels = src->pixels;
-    uint32_t* dst_pixels = dst->pixels;
+    uint32_t* src_pixels = (uint32_t*)src->pixels;
+    uint32_t* dst_pixels = (uint32_t*)dst->pixels;
     for (int i = 0; i < src_h; ++i) {
       for (int j = 0; j < src_w; ++j) {
         dst_pixels[dst_offset + j + i * dst->w] = src_pixels[src_offset + j + i * src->w];
@@ -47,8 +47,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     }
   }
   else if (src->format->BitsPerPixel == 8) {
-    uint8_t* src_pixels = src->pixels;
-    uint8_t* dst_pixels = dst->pixels;
+    uint8_t* src_pixels = (uint8_t*)src->pixels;
+    uint8_t* dst_pixels = (uint8_t*)dst->pixels;
     for (int i = 0; i < src_h; ++i) {
       for (int j = 0; j < src_w; ++j) {
         dst_pixels[dst_offset + j + i * dst->w] = src_pixels[src_offset + j + i * src->w];
@@ -74,7 +74,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   int offset = x + y * dst->w;
 
   if (dst->format->BitsPerPixel == 32) {
-    uint32_t* pixels = dst->pixels;
+    uint32_t* pixels = (uint32_t*)dst->pixels;
     for (int i = 0; i < h; ++i) {
       for (int j = 0; j < w; ++j) {
         pixels[offset + j + i * dst->w] = color;
@@ -90,7 +90,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
         break;
     }
     // 向pixels填充下标
-    uint8_t* pixels = dst->pixels;
+    uint8_t* pixels = (uint8_t*)dst->pixels;
     for (int i = 0; i < h; ++i) {
       for (int j = 0; j < w; ++j) {
         pixels[offset + j + i * dst->w] = index;
@@ -105,12 +105,11 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     NDL_OpenCanvas(&s->w, &s->h);
     is_init_NDLcanvas = 1;
   }
-  // printf("x: %d y: %d w: %d h: %d\n", x, y, w, h);
-  // printf("s->w: %d s->h: %d\n", s->w, s->h);
+
   if (w == 0 || h == 0) { w = s->w; h = s->h; }
 
   if (s->format->BitsPerPixel == 32) {
-    NDL_DrawRect(s->pixels, x, y, w, h);
+    NDL_DrawRect((uint32_t*)s->pixels, x, y, w, h);
   }
   else if (s->format->BitsPerPixel == 8) {
     uint32_t offset = x + y * s->w;
@@ -235,7 +234,7 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     SDL_BlitSurface(src, &rect, dst, dstrect);
   }
   else {
-    printf("bad hit\n");
+    //printf("bad hit\n");
     assert(0);
   }
 }

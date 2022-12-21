@@ -30,7 +30,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 	memset(type, 0, sizeof(type));
 	memset(name, 0, sizeof(name));
 	sscanf(buf, "%s %s", type, name);
-	//printf("type=%s, name=%s\n", type, name);
+	printf("type=%s, name=%s\n", type, name);
 	int n = sizeof(keyname) / sizeof(char *);
 	for (int i = 0; i < n; i++) {
 		if (strcmp(name, keyname[i]) == 0) {
@@ -47,7 +47,6 @@ int SDL_PollEvent(SDL_Event *ev) {
 		ev->type = SDL_KEYUP;
 		keyState[ev->key.keysym.sym] = 0;
 	}
-	printf("reach here\n");
   return 1;
 }
 

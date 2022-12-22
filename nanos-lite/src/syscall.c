@@ -1,12 +1,18 @@
 #include <common.h>
 #include "syscall.h"
 #include <time.h>
+#include "fs.h"
+#include <sys/time.h>
+#include <proc.h>
 
 int fs_open(const char *pathname, int flags, int mode);
 size_t fs_read(int fd, void *buf, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len);
 size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
+
+void naive_uload(PCB *pcb, const char *filename);
+//int execve(const char *filename, char* const arg[], char* const envp[]);
 
 void sys_yield(Context *c) {
 	yield();
@@ -15,7 +21,12 @@ void sys_yield(Context *c) {
 
 void sys_exit(Context *c) {
 	int status = c->GPR2;
-	halt(status);
+	if (status == 0) {
+		naive_uload(NULL, "/bin/nterm");
+	}
+	else {
+		halt(status);
+	}
 }
 
 void sys_write(Context *c) {
@@ -60,6 +71,15 @@ void sys_close(Context *c) {
 	c->GPRx = fs_close(fd);
 }
 
+void sys_execve(Context *c) {
+	const char* filename = (const char*)c->GPR2;
+	//char* *arg = (char**)c->GPR3;
+	//char* const* envp = (char* const*)c->GPR4;
+	
+	naive_uload(NULL, filename);
+	c->GPRx = 0;
+}
+
 void sys_gettimeofday(Context *c) {
 	struct timeval* tv = (struct timeval*)c->GPR2;
 	// struct timezone *tz = (struct timezone*)c->GPR3;
@@ -92,6 +112,8 @@ void do_syscall(Context *c) {
 			sys_lseek(c);break;
 		case 9:
 			sys_brk(c);break;
+		case 13:
+			sys_execve(c);break;
 		case 19:
 			sys_gettimeofday(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);

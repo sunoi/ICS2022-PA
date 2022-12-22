@@ -27,13 +27,20 @@ static void sh_handle_cmd(const char *cmd) {
 	char buf[256] = {};
 	int i = 0; 
 	int j = 0;
-	for (i = 0; cmd[i] != ' ' && cmd[i] != '\n'; i++)
+	while (cmd[i] != ' ' && cmd[i] != '\n') {
+		pathname[i] = cmd[i];
+		i++;
+	}
 	i++;
-	for (j = 0; cmd[i] != '\n'; j++, i++)
-		buf[j] = cmd[i];
 
+	while (cmd[i] != '\n') {
+		buf[j] = cmd[i];
+		i++;
+		j++;
+	}
 	char *argv[] = {pathname, buf, NULL};
 	execvp(pathname, argv);
+	//assert(0);
 }
 
 void builtin_sh_run() {

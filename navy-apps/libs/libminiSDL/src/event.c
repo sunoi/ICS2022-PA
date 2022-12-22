@@ -52,7 +52,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 
 int SDL_WaitEvent(SDL_Event *event) {
 	while(SDL_PollEvent(event) == 0);
-	printf("reach here\n");
+	//printf("reach here\n");
   return 1;
 }
 

@@ -23,8 +23,8 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
-	char pathname[128] = {};
-	char buf[32] {};
+	char pathname[256] = {};
+	char buf[256] = {};
 	int i = 0; 
 	int j = 0;
 	while (cmd[i] != ' ' && cmd[i] != '\n') {
@@ -38,7 +38,6 @@ static void sh_handle_cmd(const char *cmd) {
 		j++;
 	}
 	char *argv[] = {pathname, buf, NULL};
-	clear_screen();
 	execvp(pathname, argv);
 	assert(0);
 }

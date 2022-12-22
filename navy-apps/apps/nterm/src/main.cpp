@@ -10,6 +10,10 @@ Terminal *term = NULL;
 void builtin_sh_run();
 void extern_app_run(const char *app_path);
 
+static void init_env() {
+	setenv("PATH", "usr/bin:/bin", 0);
+}
+
 int main(int argc, char *argv[]) {
   SDL_Init(0);
   font = new BDF_Font(font_fname);
@@ -18,6 +22,8 @@ int main(int argc, char *argv[]) {
   int win_w = font->w * W;
   int win_h = font->h * H;
   screen = SDL_SetVideoMode(win_w, win_h, 32, SDL_HWSURFACE);
+
+	init_env();
 
   term = new Terminal(W, H);
 

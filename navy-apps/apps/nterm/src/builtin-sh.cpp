@@ -39,7 +39,7 @@ static void sh_handle_cmd(const char *cmd) {
 	}
 	char *argv[] = {pathname, buf, NULL};
 	clear_screen();
-	execve(pathname, argv);
+	execvp(pathname, argv);
 	assert(0);
 }
 

@@ -33,8 +33,9 @@ void sys_yield(Context *c) {
 
 void sys_exit(Context *c) {
 	int status = c->GPR2;
+	printf("status=%d\n", status);
 	if (status == 0) {
-		execve("/bin/init", 0, 0);
+		execve("/bin/nterm", 0, 0);
 	}
 	else {
 		halt(status);

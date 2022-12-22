@@ -75,6 +75,7 @@ void sys_execve(Context *c) {
 	const char* filename = (const char*)c->GPR2;
 	//char* *arg = (char**)c->GPR3;
 	//char* const* envp = (char* const*)c->GPR4;
+	printf("filename=%s\n", filename);
 	int fd = fs_open(filename, 0, 0);
 	if (fd == -1) {
 		c->GPRx = -1;

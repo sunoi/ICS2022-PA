@@ -22,7 +22,7 @@ void sys_yield(Context *c) {
 void sys_exit(Context *c) {
 	int status = c->GPR2;
 	if (status == 0) {
-		naive_uload(NULL, "/bin/menu");
+		naive_uload(NULL, "/bin/nterm");
 	}
 	else {
 		halt(status);
@@ -75,6 +75,14 @@ void sys_execve(Context *c) {
 	const char* filename = (const char*)c->GPR2;
 	//char* *arg = (char**)c->GPR3;
 	//char* const* envp = (char* const*)c->GPR4;
+	int fd = fs_open(filename, 0, 0);
+	if (fd == -1) {
+		c->GPRx = -1;
+		return;
+	}
+	else {
+		fs_close(fd);
+	}
 	
 	naive_uload(NULL, filename);
 	c->GPRx = 0;

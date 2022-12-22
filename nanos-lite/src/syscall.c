@@ -21,7 +21,7 @@ int execve(const char *filename, char* const arg[], char* const envp[]) {
 	else {
 		fs_close(fd);
 	}
-	//printf("filename=%s\n",filename);
+	printf("filename=%s\n",filename);
 	naive_uload(NULL, filename);
 	return 0;
 }

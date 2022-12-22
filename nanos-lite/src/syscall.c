@@ -12,7 +12,18 @@ size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
 
 void naive_uload(PCB *pcb, const char *filename);
-//int execve(const char *filename, char* const arg[], char* const envp[]);
+
+int execve(const char *filename, char* const arg[], char* const envp[]) {
+	int fd = fs_open(filename, 0, 0);
+	if (fd == -1) {
+		return -1;
+	}
+	else {
+		fs_close(fd);
+	}
+	naive_uload(NULL, filename);
+	return 0;
+}
 
 void sys_yield(Context *c) {
 	yield();
@@ -22,7 +33,7 @@ void sys_yield(Context *c) {
 void sys_exit(Context *c) {
 	int status = c->GPR2;
 	if (status == 0) {
-		naive_uload(NULL, "/bin/nterm");
+		execve("/bin/nterm", 0, 0);
 	}
 	else {
 		halt(status);
@@ -73,20 +84,10 @@ void sys_close(Context *c) {
 
 void sys_execve(Context *c) {
 	const char* filename = (const char*)c->GPR2;
-	//char* *arg = (char**)c->GPR3;
-	//char* const* envp = (char* const*)c->GPR4;
-	printf("filename=%s\n", filename);
-	int fd = fs_open(filename, 0, 0);
-	if (fd == -1) {
-		c->GPRx = -1;
-		return;
-	}
-	else {
-		fs_close(fd);
-	}
-	
-	naive_uload(NULL, filename);
-	c->GPRx = 0;
+	char* *arg = (char**)c->GPR3;
+	char* const* envp = (char* const*)c->GPR4;
+	//printf("filename=%s\n", filename);
+	c->GPRx = execve(filename, arg, envp);
 }
 
 void sys_gettimeofday(Context *c) {

@@ -106,7 +106,7 @@ void sys_gettimeofday(Context *c) {
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-	if (a[0] == 13) assert(0);
+	//if (a[0] == 13) assert(0);
   switch (a[0]) {
 		case 0:
 			sys_exit(c);break;

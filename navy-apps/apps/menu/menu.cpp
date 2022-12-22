@@ -99,10 +99,9 @@ int main(int argc, char *argv[], char *envp[]) {
       case SDLK_LEFT: prev(); break;
       case SDLK_RIGHT: next(); break;
     }
-
+		assert(0);
     if (i != -1 && i <= i_max) {
       i += page * 10;
-			pritnf("i=%d\n", i);
       auto *item = &items[i];
       const char *exec_argv[3];
       exec_argv[0] = item->bin;

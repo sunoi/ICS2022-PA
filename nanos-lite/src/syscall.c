@@ -89,7 +89,6 @@ void sys_execve(Context *c) {
 	char* *arg = (char**)c->GPR3;
 	char* const* envp = (char* const*)c->GPR4;
 	//printf("filename=%s\n", filename);
-	assert(0);
 	c->GPRx = execve(filename, arg, envp);
 }
 
@@ -107,7 +106,7 @@ void sys_gettimeofday(Context *c) {
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-	printf("a[0]=%d\n", a[0]);
+	//printf("a[0]=%d\n", a[0]);
   switch (a[0]) {
 		case 0:
 			sys_exit(c);break;

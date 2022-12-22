@@ -39,7 +39,7 @@ static void sh_handle_cmd(const char *cmd) {
 	}
 	char *argv[] = {pathname, buf, NULL};
 	execvp(pathname, argv);
-	assert(0);
+	//assert(0);
 }
 
 void builtin_sh_run() {

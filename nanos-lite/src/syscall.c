@@ -21,7 +21,7 @@ int execve(const char *filename, char* const arg[], char* const envp[]) {
 	else {
 		fs_close(fd);
 	}
-	printf("filename=%s\n",filename);
+	//printf("filename=%s\n",filename);
 	naive_uload(NULL, filename);
 	return 0;
 }
@@ -35,7 +35,7 @@ void sys_exit(Context *c) {
 	int status = c->GPR2;
 	printf("status=%d\n", status);
 	if (status == 0) {
-		execve("/bin/nterm", 0, 0);
+		execve("/bin/menu", 0, 0);
 	}
 	else {
 		halt(status);

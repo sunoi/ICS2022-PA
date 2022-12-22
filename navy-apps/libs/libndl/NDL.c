@@ -19,8 +19,7 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-	int ret = read(evtdev, buf, len);
-	return ret;
+	return read(evtdev, buf, len);
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
@@ -54,19 +53,16 @@ static int flag = 0;
 static int offset_x = 0;
 static int offset_y = 0;
 
-static inline void init_offset(int w, int h) {
-	if (!flag) {
+void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
+	if (flag == 0) {
 		offset_x = (width - w) / 2;
 		offset_y = (height - h) / 2;
 		flag = 1;
 	}
-}
 
-void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-	init_offset(w, h);
 	x += offset_x;
 	y += offset_y;
-	//printf("x=%d, y=%d\n", x, y);
+
 	uint32_t color[w];
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {

@@ -32,6 +32,7 @@ void sys_yield(Context *c) {
 
 void sys_exit(Context *c) {
 	int status = c->GPR2;
+	printf("status = %d\n", status);
 	if (status == 0) {
 		execve("/bin/nterm", 0, 0);
 	}
@@ -104,7 +105,7 @@ void sys_gettimeofday(Context *c) {
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-	printf("a[0]=%d\n", a[0]);
+	//printf("a[0]=%d\n", a[0]);
   switch (a[0]) {
 		case 0:
 			sys_exit(c);break;

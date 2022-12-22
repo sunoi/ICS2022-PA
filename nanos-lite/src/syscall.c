@@ -22,7 +22,7 @@ void sys_yield(Context *c) {
 void sys_exit(Context *c) {
 	int status = c->GPR2;
 	if (status == 0) {
-		naive_uload(NULL, "/bin/nterm");
+		naive_uload(NULL, "/bin/menu");
 	}
 	else {
 		halt(status);

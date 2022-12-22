@@ -21,7 +21,6 @@ int execve(const char *filename, char* const arg[], char* const envp[]) {
 	else {
 		fs_close(fd);
 	}
-	yield();
 	printf("filename=%s\n",filename);
 	naive_uload(NULL, filename);
 	return 0;
@@ -59,7 +58,7 @@ void sys_open(Context *c) {
 	const char* pathname = (const char*)c->GPR2;
 	int flags = c->GPR3;
 	int mode = c->GPR4;
-	//printf("open_pathname = %s\n", pathname);
+	printf("open_pathname = %s\n", pathname);
 	c->GPRx = fs_open(pathname, flags, mode);
 	//printf("fd = %d\n", c->GPRx);
 }

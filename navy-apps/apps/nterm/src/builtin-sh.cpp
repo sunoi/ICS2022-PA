@@ -23,6 +23,24 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
+	char pathname[128] = {};
+	char buf[32] {};
+	int i = 0; 
+	int j = 0;
+	while (cmd[i] != ' ' && cmd[i] != '\n') {
+		pathname[i] = cmd[i];
+		i++;
+	}
+	i++;
+	while (cmd[i] != '\n') {
+		buf[j] = cmd[i];
+		i++;
+		j++;
+	}
+	char *argv[] = {pathname, buf, NULL};
+	clear_screen();
+	execve(pathname, argv);
+	assert(0);
 }
 
 void builtin_sh_run() {

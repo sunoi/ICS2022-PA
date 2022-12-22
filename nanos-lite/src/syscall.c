@@ -124,8 +124,8 @@ void do_syscall(Context *c) {
 			sys_lseek(c);break;
 		case 9:
 			sys_brk(c);break;
-		/*case 13:
-			sys_execve(c);break;*/
+		case 13:
+			sys_execve(c);break;
 		case 19:
 			sys_gettimeofday(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);

@@ -77,13 +77,14 @@ int main(int argc, char *argv[], char *envp[]) {
   set_i_max();
 
   while (1) {
+		assert(0);
     display_menu(i_max);
 
     SDL_Event e;
     do {
       SDL_WaitEvent(&e);
     } while (e.type != SDL_KEYDOWN);
-		assert(0);
+
     int i = -1;
     switch (e.key.keysym.sym) {
       case SDLK_0: i = 0; break;

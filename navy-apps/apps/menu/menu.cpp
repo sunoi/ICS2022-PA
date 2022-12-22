@@ -101,7 +101,6 @@ int main(int argc, char *argv[], char *envp[]) {
     }
 
     if (i != -1 && i <= i_max) {
-			printf("i=%d\n", i);
       i += page * 10;
       auto *item = &items[i];
       const char *exec_argv[3];
@@ -110,6 +109,7 @@ int main(int argc, char *argv[], char *envp[]) {
       exec_argv[2] = NULL;
       clear_display();
       SDL_UpdateRect(screen, 0, 0, 0, 0);
+			printf("reach here\n");
       execve(exec_argv[0], (char**)exec_argv, (char**)envp);
       fprintf(stderr, "\033[31m[ERROR]\033[0m Exec %s failed.\n\n", exec_argv[0]);
     } else {

@@ -33,7 +33,6 @@ void sys_yield(Context *c) {
 
 void sys_exit(Context *c) {
 	int status = c->GPR2;
-	printf("status = %d\n", status);
 	if (status == 0) {
 		execve("/bin/nterm", 0, 0);
 	}
@@ -89,6 +88,7 @@ void sys_execve(Context *c) {
 	char* *arg = (char**)c->GPR3;
 	char* const* envp = (char* const*)c->GPR4;
 	//printf("filename=%s\n", filename);
+	assert(0);
 	c->GPRx = execve(filename, arg, envp);
 }
 

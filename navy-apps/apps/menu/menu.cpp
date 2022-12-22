@@ -68,7 +68,6 @@ static void clear_display(void) {
 }
 
 int main(int argc, char *argv[], char *envp[]) {
-  assert(0);
 	SDL_Init(0);
   screen = SDL_SetVideoMode(0, 0, 32, SDL_HWSURFACE);
 

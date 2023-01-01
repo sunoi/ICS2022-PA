@@ -62,7 +62,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 }
 
 int printf(const char *fmt, ...) {
-  char out[2048];
+  char out[10000];
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(out, fmt, ap);
@@ -81,7 +81,6 @@ int sprintf(char *out, const char *fmt, ...) {
 	make_out(out, fmt, ap);
 	va_end(ap);
 	return 0;
-  //panic("Not implemented");
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
